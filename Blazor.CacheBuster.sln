@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AED4622C-CE5A-4485-AAFD-D91BA1A00A6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.CacheBuster", "src\Blazor.CacheBuster\Blazor.CacheBuster.csproj", "{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6761F204-437B-4CA8-8DFA-E61883662A72}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|x64.Build.0 = Release|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE38BEF5-6A48-4600-BD79-4F532B73A4D5} = {AED4622C-CE5A-4485-AAFD-D91BA1A00A6A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,34 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="AddHashToJsModules" AfterTargets="Publish">
+    <PropertyGroup>
+      <!--User-defined additional and ignore files, which-->
+      <BlazorCacheBuster_AdditionalFilesToHash Condition="'$(BlazorCacheBuster_AdditionalFilesToHash)' == ''"></BlazorCacheBuster_AdditionalFilesToHash>
+      <BlazorCacheBuster_IgnoreFiles Condition="'$(BlazorCacheBuster_IgnoreFiles)' == ''"></BlazorCacheBuster_IgnoreFiles>
+
+      <AddHashToJsModules_TempPath Condition="'$(AddHashToJsModules_TempPath)' == ''">$([System.IO.Path]::GetTempPath())</AddHashToJsModules_TempPath>
+      <AddHashToJsModules_TempFolderName Condition="'$(AddHashToJsModules_TempFolderName)' == ''">$([System.IO.Path]::GetRandomFileName())</AddHashToJsModules_TempFolderName>
+      <AddHashToJsModules_TempFolder Condition="'$(AddHashToJsModules_TempFolder)' == ''">$([System.IO.Path]::Combine('$(AddHashToJsModules_TempPath)','$(AddHashToJsModules_TempFolderName)'))</AddHashToJsModules_TempFolder>
+
+      <AddHashToJsModules_HashesFilePath Condition="'$(AddHashToJsModules_HashesFilePath)' == ''">$([System.IO.Path]::Combine('$(AddHashToJsModules_TempFolder)','hashes.csv'))</AddHashToJsModules_HashesFilePath>
+      <AddHashToJsModules_wwwroot>$(PublishDir)wwwroot\</AddHashToJsModules_wwwroot>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <AddHashToJsModules_JsFiles Include="$(AddHashToJsModules_wwwroot)**\*.js;$(AddHashToJsModules_wwwroot)**\*.mjs"
+                                  Exclude="$(AddHashToJsModules_wwwroot)_framework\**\*.js;BlazorCacheBuster_IgnoreFiles" />
+      <AddHashToJsModules_FilesToHash Include="@(AddHashToJsModules_JsFiles);$(BlazorCacheBuster_AdditionalFilesToHash)"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(AddHashToJsModules_TempFolder)" />
+
+    <!--hash files-->
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File $(MSBuildThisFileDirectory)\HashFiles.ps1 -FilePath @(AddHashToJsModules_FilesToHash->'%(Identity)') -HashesFilePath $(AddHashToJsModules_HashesFilePath)" />
+
+    <!--then apply computed hashes-->
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File $(MSBuildThisFileDirectory)\AddHashToJsModules.ps1 -FilePath @(AddHashToJsModules_JsFiles->'%(Identity)') -HashesFilePath $(AddHashToJsModules_HashesFilePath) -RootDir $(AddHashToJsModules_wwwroot)" />
+
+    <RemoveDir Directories="$(AddHashToJsModules_TempFolder)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,22 @@
+@using Blazor.CacheBuster.Extensions
+@using Microsoft.AspNetCore.Hosting
+
+@inject IWebHostEnvironment Environment
+
+<link href="@(_hashSum is null ? Href : $"{Href}?v={_hashSum}")" @attributes="UserAttributes" />
+
+@code
+{
+    private string? _hashSum;
+
+    [Parameter]
+    public string Href { get; set; } = default!;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object?> UserAttributes { get; set; } = [];
+
+    protected override void OnInitialized()
+    {
+        _hashSum = Environment.WebRootFileProvider.ComputeFileHash(Href);
+    }
+}

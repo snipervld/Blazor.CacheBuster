@@ -1,0 +1,27 @@
+@using Blazor.CacheBuster.Extensions
+@using Microsoft.AspNetCore.Hosting
+
+@inject IWebHostEnvironment Environment
+
+<script src="@(_hashSum is null ? Src : $"{Src}?v={_hashSum}")" @attributes="UserAttributes">
+    @ChildContent
+</script>
+
+@code
+{
+    private string? _hashSum;
+
+    [Parameter]
+    public string Src { get; set; } = default!;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object?> UserAttributes { get; set; } = [];
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _hashSum = Environment.WebRootFileProvider.ComputeFileHash(Src);
+    }
+}
