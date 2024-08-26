@@ -4,7 +4,7 @@ Blazor.CacheBuster is a library, which allows to hashify script and style URLs t
 
 ## Purpose
 
-Usually, we use service workers to prevent browsers from caching static files, but there are envirnoments, e.g. Zoom Marketplace, which forbids service workers due to security reasons. That's why this library has been build - to give us an ability to easily provide the new static files to end users without cache reset.
+Usually, we use service workers to prevent browsers from caching static files, but there are envirnoments, e.g. Zoom Marketplace, which forbids service workers due to security reasons. That's why this library has been build - it gives us the opportunity to easily provide the new static files to end users without cache reset.
 
 ## Framework support
 
@@ -74,3 +74,8 @@ import { log } from '/js/logging.js?v=23GFD...<hash>';
 ## Limitations
 
 Only native ES modules are supported.
+
+## Other info
+
+1 Hashes are computed by calling c#'s `SHA1.Create` API.\
+2 There is a subtle difference between hashing URLs by `Script` and `Link` components and hashing in-project `.js`/`.mjs` scripts: `.js`/`.mjs` scripts are processed during the publish only, but those components works in runtime, e.g. you can update the script during debug, reload the page, and the new hash will be computed. To improve performance, computed hashes are stored in in-memory dictionary, so there will be little to no performance loss in production environments.
